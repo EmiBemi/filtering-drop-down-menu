@@ -1,22 +1,28 @@
 import * as React from "react";
 import { PropertyControls, ControlType } from "framer";
-import { string } from "prop-types";
+import styled from 'styled-components';
 
-const style: React.CSSProperties = {
-  height: 400,
-  width: 250,
-  display: "inline",
-  alignItems: "center",
-  justifyContent: "center",
-  textAlign: "left",
-  fontSize: 25,
-  color: "#000000",
-  padding: 10,
-  overflow: "hidden"
-};
+const Styled = styled('div')`
+position: relative;
+  /* width: 50%; */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: "2px";
+  color: ${(p: Partial<Props>) => p.color};
+  background-color: ${(p: Partial<Props>) => p.backgroundColor};
+  border: ${(p: Partial<Props>) => p.border};
+    `;
+
 
 interface Props {
   text: string;
+  color: string;
+  backgroundColor: string;
+  border: string;
+  padding: string;
 }
 
 //   interface State {
@@ -28,7 +34,7 @@ interface State {
   selectedOption2: string;
 }
 
-export class Interface_Dropdown extends React.Component<Props, State> {
+export class Filter_Drop_Down_3 extends React.Component<Props, State> {
   private selectRef: React.RefObject<HTMLSelectElement>;
 
   constructor(props) {
@@ -39,6 +45,7 @@ export class Interface_Dropdown extends React.Component<Props, State> {
     this.state = { selectedOption1: null, selectedOption2: null };
   }
 
+  
   componentDidMount() {
     this.selectRef.current;
   }
@@ -55,7 +62,11 @@ export class Interface_Dropdown extends React.Component<Props, State> {
 
   // Set default properties
   static defaultProps = {
-    text: "Hello World!"
+    text: "Hello World!",
+    color: "black",
+    backgroundColor: "grey",
+    padding: "1 rem"
+
   };
 
   // Items shown in property panel
@@ -83,7 +94,10 @@ export class Interface_Dropdown extends React.Component<Props, State> {
     );
 
     return (
-      <div style={style}>
+      <Styled
+          color={this.props.color}
+          backgroundColor={this.props.backgroundColor}
+          >
         <div>
           <label>Select This</label>
           <select
@@ -114,7 +128,7 @@ export class Interface_Dropdown extends React.Component<Props, State> {
             ))}
           </select>
         </div>
-      </div>
+      </Styled>
     );
   }
 }
